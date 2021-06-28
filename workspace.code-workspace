@@ -1,0 +1,95 @@
+{
+	"folders": [
+		{
+			"path": "test"
+		},
+		{
+			"path": "test2"
+		},
+		{
+			"path": "test3"
+		},
+		{
+			"path": "test4"
+		},
+		{
+			"name": "bmp_transmit_test",
+			"path": "bmp_transmit_test"
+		},
+		{
+			"name": "receiver_test",
+			"path": "receiver_test"
+		},
+		{
+			"path": "shared"
+		},
+		{
+			"name": "tester",
+			"path": "tester"
+		},
+		{
+			"name": "hello world",
+			"path": "hello world"
+		},
+		{
+			"name": "Hello World Blue Pill",
+			"path": "Hello World Blue Pill"
+		},
+		{
+			"name": "Blue Pill Reveicer",
+			"path": "Blue Pill Reveicer"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"string_view": "cpp",
+			"string": "cpp",
+			"array": "cpp",
+			"atomic": "cpp",
+			"bit": "cpp",
+			"*.tcc": "cpp",
+			"cctype": "cpp",
+			"clocale": "cpp",
+			"cmath": "cpp",
+			"cstdarg": "cpp",
+			"cstddef": "cpp",
+			"cstdint": "cpp",
+			"cstdio": "cpp",
+			"cstdlib": "cpp",
+			"cwchar": "cpp",
+			"cwctype": "cpp",
+			"deque": "cpp",
+			"unordered_map": "cpp",
+			"vector": "cpp",
+			"exception": "cpp",
+			"algorithm": "cpp",
+			"functional": "cpp",
+			"iterator": "cpp",
+			"memory": "cpp",
+			"memory_resource": "cpp",
+			"numeric": "cpp",
+			"optional": "cpp",
+			"random": "cpp",
+			"system_error": "cpp",
+			"tuple": "cpp",
+			"type_traits": "cpp",
+			"utility": "cpp",
+			"fstream": "cpp",
+			"initializer_list": "cpp",
+			"iosfwd": "cpp",
+			"istream": "cpp",
+			"limits": "cpp",
+			"new": "cpp",
+			"ostream": "cpp",
+			"sstream": "cpp",
+			"stdexcept": "cpp",
+			"streambuf": "cpp",
+			"cinttypes": "cpp",
+			"typeinfo": "cpp",
+			"list": "cpp",
+			"xhash": "cpp",
+			"xstring": "cpp",
+			"xutility": "cpp"
+		}
+	}
+}
