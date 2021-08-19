@@ -108,10 +108,24 @@ STATE state = INIT;
 
 
 void setup() {
+
+
+
+
   
   // ser();
   Serial.begin(38400);
-  Serial.println("Booting");
+  Serial.println("Booting1");
+
+  pinMode(PB3, OUTPUT);
+
+  digitalWrite(PB3, HIGH);
+
+  delay(20000);
+
+  digitalWrite(PB3, LOW);
+
+  Serial.println("Booting2");
 
   delay(1000);
 

@@ -21,14 +21,13 @@
 */
 
 #include <SPI.h>
-// #include <RH_RF95.h>
 #include <RadioLib.h>
 
 #include "../../shared/shared.h"
 
 // #define SIMULATION
 
-RFM95 radio = new Module(RFM95_CS, RFM95_INT, RFM95_RST, PB8);
+RFM95 radio = new Module(RFM95_CS, RFM95_INT, RFM95_RST, RFM95_DUMMY);
 
 // or using RadioShield
 // https://github.com/jgromes/RadioShield
@@ -57,12 +56,14 @@ void setFlag(void) {
 }
 
 void setup() {
+  pinMode(PA12, OUTPUT);
+  digitalWrite(PA12, LOW);
   // ser();
   Serial.begin(38400);
 
   // initialize SX1278 with default settings
   Serial.print(F("[SX1278] Initializing ... "));
-  int state = radio.begin();
+  int state = radio.begin(RF95_FREQ,RF95_BW,RF95_SF,RF95_CR, RF95_SYNC_WORD, RF95_POWER, RF95_PL, RF95_GAIN);
   if (state == ERR_NONE) {
     Serial.println(F("success!"));
   } else {
@@ -125,8 +126,15 @@ void loop() {
    int state = radio.readData((byte*) &p1, sizeof p1);
 
     if (state == ERR_NONE) {
+
+
+      if(check_checksum(&p1)){
+
+      
       // packet was successfully received
-      Serial.println(F("[SX1278] Received packet!"));
+      Serial.println("[SX1278] Received packet!");
+
+
 
       if (p1.package_number > 2){
         if( last == 0 ){
@@ -140,54 +148,66 @@ void loop() {
       // print data of the packet
       Serial.println("[SX1278] Data:");
 
-      Serial.print("Package Number:");
+      Serial.print("${");
+      Serial.print("\"package_number\":");
       Serial.println(p1.package_number);
 
-      Serial.print("Total Received: ");
+      Serial.print(",\"total_received\":");
       Serial.println(total_received);
 
-      Serial.print("Loss count: ");
+      Serial.print(",\"loss\":");
       Serial.println(loss);
 
-      Serial.print("Loss ratio: %");
+      Serial.print(",\"loss_ratio\":");
       Serial.println( 100 * (float) loss / (float) (total_received + loss));
 
-      Serial.print("Pressure: ");
+      Serial.print(",\"pressure\": ");
       Serial.println(p1.pressure);
 
-      Serial.print("Altitude: ");
+      Serial.print(",\"altitude\": ");
       Serial.println(p1.altitude);
 
-      Serial.print("Temp: ");
-      Serial.println(p1.temperature);
+      // Serial.print(",\"temp\": ");
+      // Serial.println(p1.temperature);
 
-      Serial.print("GPS: ");
-      Serial.println(p1.gps_string);
+      Serial.print(",\"gps_fix\": ");
+      Serial.println((int)p1.gps_fix ? "true" : "false");
 
-      Serial.print("Acceleration x: ");
-      Serial.println(p1.acc_x);
+      Serial.print(",\"gps_latitude\": ");
+      Serial.println(p1.gps_latitude, 5);
 
-      Serial.print("Acceleration y: ");
-      Serial.println(p1.acc_y);
+      Serial.print(",\"gps_longtitude\": ");
+      Serial.println(p1.gps_longtitude, 5);
 
-      Serial.print("Acceleration z: ");
-      Serial.println(p1.acc_z);
+      // Serial.print(",\"acc_x\": ");
+      // Serial.println(p1.acc_x);
+
+      // Serial.print(",\"acc_y\": ");
+      // Serial.println(p1.acc_y);
+
+      // Serial.print(",\"acc_z\": ");
+      // Serial.println(p1.acc_z);
 
       // print RSSI (Received Signal Strength Indicator)
-      Serial.print(F("RSSI:"));
+      Serial.print(F(",\"rssi\":"));
       Serial.print(radio.getRSSI());
-      Serial.println(F(" dBm"));
+      // Serial.println(F(" dBm"));
 
       // print SNR (Signal-to-Noise Ratio)
-      Serial.print(F("SNR:"));
+      Serial.print(F(",\"snr\":"));
       Serial.print(radio.getSNR());
-      Serial.println(F(" dB"));
+      // Serial.println(F(" dB"));
 
       // print frequency error
-      Serial.print(F("Frequency error:"));
+      Serial.print(F(",\"frequency_error\":"));
       Serial.print(radio.getFrequencyError());
-      Serial.println(F(" Hz"));
-      Serial.println("-----------------------------------");
+      // Serial.println(F(" Hz"));
+      // Serial.println("-----------------------------------");
+      Serial.println("}#");
+      }
+      else {
+        Serial.println(F("[SX1278] Cheksum error!"));
+      }
 
     } else if (state == ERR_CRC_MISMATCH) {
       // packet was received, but is malformed

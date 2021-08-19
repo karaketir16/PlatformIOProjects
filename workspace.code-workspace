@@ -1,18 +1,6 @@
 {
 	"folders": [
 		{
-			"path": "test"
-		},
-		{
-			"path": "test2"
-		},
-		{
-			"path": "test3"
-		},
-		{
-			"path": "test4"
-		},
-		{
 			"name": "bmp_transmit_test",
 			"path": "bmp_transmit_test"
 		},
@@ -38,6 +26,24 @@
 		{
 			"name": "Blue Pill Reveicer",
 			"path": "Blue Pill Reveicer"
+		},
+		{
+			"name": "feather test",
+			"path": "feather test"
+		},
+		{
+			"name": "feather test 2",
+			"path": "feather test 2"
+		},
+		{
+			"name": "testtest22",
+			"path": "testtest22"
+		},
+		{
+			"path": "Roket Main System - Blue Pill"
+		},
+		{
+			"path": "Roket Backup System - Blue Pill"
 		}
 	],
 	"settings": {
@@ -89,7 +95,13 @@
 			"list": "cpp",
 			"xhash": "cpp",
 			"xstring": "cpp",
-			"xutility": "cpp"
+			"xutility": "cpp",
+			"__bit_reference": "cpp",
+			"__hash_table": "cpp",
+			"__split_buffer": "cpp",
+			"filesystem": "cpp",
+			"locale": "cpp",
+			"queue": "cpp"
 		}
 	}
 }
